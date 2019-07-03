@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Electron weather app</h1>
+    <div id="data"></div>
+    <script>
+        const electron = require('electron');
+        const { ipcRenderer } = electron;
+        document.querySelector('#data').innerHTML = "<ul>";
+        ipcRenderer.on('dataFromLocalAPI', (event, data) => 
+        {
+            for (const city of data['cities'])
+            {
+                if (data['cities'].length % 5 === 0)
+                {
+                    document.querySelector('#data').innerHTML += `<li>${city.name}</li>`;
+                }
+            }
+        })
+        document.querySelector('#data').innerHTML += '</ul>';
+    </script>
+</body>
+</html>
