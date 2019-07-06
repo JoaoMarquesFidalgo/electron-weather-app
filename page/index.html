@@ -15,6 +15,7 @@
         document.querySelector('#data').innerHTML = "<ul>";
         ipcRenderer.on('dataFromLocalAPI', (event, data) => 
         {
+            console.log(data);
             for (const city of data['cities'])
             {
                 if (data['cities'].length % 5 === 0)
